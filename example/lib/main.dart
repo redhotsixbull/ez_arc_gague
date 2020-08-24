@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:ez_gauge/src/arc_ez_gague.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text("Doing"),
+          child: GradientArcPainterDemo(value: 0.8,startColor: Colors.red,endColor: Colors.green,width: 10,startAngle: 1.3, endAngle: 1.6,backgroundColor: Colors.yellow,)
         ),
       ),
     );

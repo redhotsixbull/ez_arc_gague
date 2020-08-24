@@ -2,20 +2,32 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class GradientArcPainterDemo extends StatefulWidget {
-  GradientArcPainterDemo({Key key, this.value})
+  GradientArcPainterDemo(
+      {Key key,
+      this.value,
+      this.startColor,
+      this.endColor,
+      this.width,
+      this.startAngle,
+      this.endAngle,
+      this.backgroundColor})
       : super(key: key);
   final double value;
+  final Color startColor;
+  final Color endColor;
+  final Color backgroundColor;
+  final double width;
+  final double startAngle;
+  final double endAngle;
 
   @override
   GradientArcPainterDemoState createState() => GradientArcPainterDemoState();
 }
 
-class GradientArcPainterDemoState extends State<GradientArcPainterDemo> with SingleTickerProviderStateMixin{
-
+class GradientArcPainterDemoState extends State<GradientArcPainterDemo>
+    with SingleTickerProviderStateMixin {
   double _fraction = 0.0;
   Animation<double> animation;
-  Color startColor =  Color(0xff64aef8);
-  Color endColor =  Color(0xff2644eb);
 
   @override
   void initState() {
@@ -35,7 +47,14 @@ class GradientArcPainterDemoState extends State<GradientArcPainterDemo> with Sin
 
   @override
   Widget build(BuildContext context) {
+    Color startColor = widget.startColor;
+    Color endColor = widget.endColor;
+    Color backgroundColor = widget.backgroundColor;
     double _progress = widget.value;
+    double width = widget.width;
+    double startAngle = widget.startAngle;
+    double endAngle = widget.endAngle;
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -53,11 +72,12 @@ class GradientArcPainterDemoState extends State<GradientArcPainterDemo> with Sin
                       progress: _progress,
                       startColor: startColor,
                       endColor: endColor,
-                      width: 8.0,
-                      fraction :_fraction
-                  ),
-                  child: Center()
-              ),
+                      width: width,
+                      fraction: _fraction,
+                      startAngle: startAngle,
+                      endAngle: endAngle,
+                      backgroundColor: backgroundColor),
+                  child: Center()),
             ],
           ),
         ),
@@ -71,24 +91,30 @@ class GradientArcPainter extends CustomPainter {
     @required this.progress,
     @required this.startColor,
     @required this.endColor,
+    @required this.backgroundColor,
     @required this.width,
+    @required this.startAngle,
+    @required this.endAngle,
     @required this.fraction,
   })  : assert(progress != null),
         assert(startColor != null),
         assert(endColor != null),
         assert(width != null),
+        assert(startAngle != null),
+        assert(endAngle != null),
         super();
   final double fraction;
   final double progress;
   final Color startColor;
   final Color endColor;
+  final Color backgroundColor;
   final double width;
+  final double startAngle;
+  final double endAngle;
 
   @override
   void paint(Canvas canvas, Size size) {
-
     print('paint $fraction');
-
 
     final rect = new Rect.fromLTWH(0.0, 0.0, size.width, size.height);
     final gradient = new SweepGradient(
@@ -100,17 +126,18 @@ class GradientArcPainter extends CustomPainter {
 
     final center = new Offset(size.width / 2, size.height / 2);
     final radius = math.min(size.width / 2, size.height / 2) - (width / 2);
-    final startAngle = math.pi * 0.7;
+    final startAngleValue = math.pi * startAngle;
 
     final paint2 = new Paint()
-      ..color = Colors.grey
-      ..strokeCap = StrokeCap.butt //gradation is not adjust in StrokeCap.round not recommend
+      ..color = backgroundColor
+      ..strokeCap = StrokeCap
+          .butt //gradation is not adjust in StrokeCap.round not recommend
       ..style = PaintingStyle.stroke
       ..strokeWidth = width;
-    final endAngle = math.pi * 1.6;
+    final endAngleValue = math.pi * 1.6;
 
     canvas.drawArc(new Rect.fromCircle(center: center, radius: radius),
-        startAngle, endAngle *fraction, false, paint2);
+        startAngleValue, endAngleValue * fraction, false, paint2);
 
     final paint = new Paint()
       ..shader = gradient.createShader(rect)
@@ -118,10 +145,10 @@ class GradientArcPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = width;
 
-    final sweepAngle = math.pi * progress * 1.6;
+    final sweepAngle = math.pi * progress * endAngle;
 
     canvas.drawArc(new Rect.fromCircle(center: center, radius: radius),
-        startAngle, sweepAngle * fraction , false, paint);
+        startAngleValue, sweepAngle * fraction, false, paint);
   }
 
   @override
