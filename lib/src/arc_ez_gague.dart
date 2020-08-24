@@ -104,7 +104,7 @@ class GradientArcPainter extends CustomPainter {
 
     final paint2 = new Paint()
       ..color = Colors.grey
-      ..strokeCap = StrokeCap.butt // StrokeCap.round is not recommended.
+      ..strokeCap = StrokeCap.butt //gradation is not adjust in StrokeCap.round not recommend
       ..style = PaintingStyle.stroke
       ..strokeWidth = width;
     final endAngle = math.pi * 1.6;
@@ -114,7 +114,7 @@ class GradientArcPainter extends CustomPainter {
 
     final paint = new Paint()
       ..shader = gradient.createShader(rect)
-      ..strokeCap = StrokeCap.butt // StrokeCap.round is not recommended.
+      ..strokeCap = StrokeCap.butt
       ..style = PaintingStyle.stroke
       ..strokeWidth = width;
 
