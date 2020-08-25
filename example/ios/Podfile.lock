@@ -1,0 +1,22 @@
+PODS:
+  - ez_gauge (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - ez_gauge (from `.symlinks/plugins/ez_gauge/ios`)
+  - Flutter (from `Flutter`)
+
+EXTERNAL SOURCES:
+  ez_gauge:
+    :path: ".symlinks/plugins/ez_gauge/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  ez_gauge: 288ead7bedc401d7227bad84aa21d35f3b07f459
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+
+PODFILE CHECKSUM: c34e2287a9ccaa606aeceab922830efb9a6ff69a
+
+COCOAPODS: 1.9.3
