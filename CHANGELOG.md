@@ -1,3 +1,6 @@
 ## 0.0.1
+first launching
 
-* TODO: Describe initial release.
+## 0.0.1
+sample source
+and set properties

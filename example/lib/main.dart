@@ -11,7 +11,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -25,8 +24,15 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: GradientArcPainterDemo(value: 0.8,startColor: Colors.red,endColor: Colors.green,width: 10,startAngle: 1.3, endAngle: 1.6,backgroundColor: Colors.yellow,)
-        ),
+            child: GradientArcPainterDemo(
+          value: 0.8,
+          startColor: Colors.red,
+          endColor: Colors.orange,
+          width: 10,
+          startAngle: 0.7,
+          endAngle: 1.6,
+          backgroundColor: Colors.grey,
+        )),
       ),
     );
   }
